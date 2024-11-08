@@ -8,39 +8,23 @@
 <p>
     <a asp-action="Create">Criar novo</a>
 </p>
-@* @Html.BeginForm("Search","Estudantes", FormMethod.Get)
-{
-<input type="text" name="searchText" id="searchText" />
-<button type="submit">Pesquisar</button>
-} *@
-<table class="table">
+
+<table id="estudantesTable" class="display table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Idade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Curso)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.First().Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Idade)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Curso)</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Idade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Curso)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Idade)</td>
+                <td>@Html.DisplayFor(modelItem => item.Curso)</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
@@ -50,4 +34,14 @@
         }
     </tbody>
 </table>
+
+<!-- Inclua o jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Inclua o JavaScript do DataTables -->
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+                $('#estudantesTable').DataTable();
+    });
+</script>
 
