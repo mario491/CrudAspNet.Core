@@ -119,16 +119,23 @@ namespace WebApplication9.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string searchText)
         {
+            searchText = Request.Query["busca"];
+
             if (string.IsNullOrEmpty(searchText))
+
+     
             { return NotFound(); }
             var student = _context
                 .Estudante
                 .Where(x=>x.Nome.Contains(searchText) || x.Curso.Contains(searchText))
                 .ToList();
             return View("Index", student);
-        }
-        // GET: Estudantes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+             
+
+            }
+            // GET: Estudantes/Delete/5
+            public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
